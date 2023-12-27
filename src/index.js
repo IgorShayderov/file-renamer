@@ -1,9 +1,23 @@
-import { readFile, readdir } from 'node:fs/promises';
+import { rename, readdir } from 'node:fs/promises';
 import path from 'path';
 
-export const rename = async (dirPath, oldName, newName) => {
-  const fullDirPath = path.resolve(__dirname, dirPath);
-  const res = await readdir(fullDirPath)
+export const renameFiles = async (dirPath, oldName, newName) => {
+  try {
+    const fullDirPath = path.resolve(process.cwd(), dirPath);
+    const fileNames = await readdir(fullDirPath);
 
-  console.log(res)
+    fileNames.forEach(async (filename) => {
+      const newFilename = filename.replace(oldName, newName);
+
+      console.log('Было: ', filename);
+      console.log('Стало: ', newFilename);
+
+      const oldPath = `${dirPath}/${filename}`;
+      const newPath = `${dirPath}/${newFilename}`;
+
+      await rename(oldPath, newPath);
+    });
+  } catch (e) {
+    console.log('Ошибочка ', e);
+  }
 }

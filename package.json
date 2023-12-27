@@ -1,8 +1,8 @@
 {
   "name": "file-renamer",
   "version": "1.0.0",
-  "description": "Utility to rename files",
-  "main": "index.js",
+  "description": "Utility to rename all files in specific directory",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,5 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "commander": "^11.1.0"
+  },
+  "bin": {
+    "file-renamer": "bin/index.js"
   }
 }
